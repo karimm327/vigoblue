@@ -1,5 +1,5 @@
 body {
-  padding-bottom: 90px; /* pour éviter que le contenu soit caché derrière la navbar */
+     padding-bottom: calc(90px + env(safe-area-inset-bottom));
 }
 
     
