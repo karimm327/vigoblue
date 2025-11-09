@@ -1,7 +1,6 @@
 body {
   margin:0;
-  padding-bottom: calc(70px + env(safe-area-inset-bottom));
-
+  margin-botttom:80;
 }
 
     
@@ -62,11 +61,16 @@ color:white;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: white;
-  padding-bottom: env(safe-area-inset-bottom); /* adapte sur mobile */
+  background: black; /* ta couleur */
+  color: white;
   z-index: 9999;
-  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px 0; /* un peu de hauteur */
+  padding-bottom: env(safe-area-inset-bottom); /* colle bien au bord sur mobile */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 
 
 
