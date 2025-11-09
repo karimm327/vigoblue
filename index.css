@@ -60,18 +60,31 @@ color:white;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: black; /* ta couleur */
+  background: black;
   color: white;
   z-index: 9999;
-  padding: 10px 0; /* un peu de hauteur */
-  padding-bottom: env(safe-area-inset-bottom); /* colle bien au bord sur mobile */
+  padding: 12px 0;
+  padding-bottom: env(safe-area-inset-bottom); /* colle sur iPhone */
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* === LIENS DANS LA NAV === */
+.navbar-fixed-bottom a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
 
-
+.navbar-fixed-bottom a:hover {
+  color: #00aaff; /* ton bleu VigoBlue */
+}
 
 .pagination-minimal .page-item.active .page-link::after {
     content: '';
