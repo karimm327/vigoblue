@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Vigoblue</title>
+  <link rel="stylesheet" href="index.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Oswald&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+<section id="page9">
+
+     <!-- Liens visibles uniquement en desktop -->
+<nav aria-label="Page navigation">
+
+
+    <ul class="pagination pagination-minimal justify-content-end d-none d-lg-flex">
+      
+
+        <li class="page-item">
+       
+             
+        <li class="page-item active"><a class="page-link border-end" href="#aide">Trouver un magasin</a></li>
+        <li class="page-item active"><a class="page-link border-end" href="#aide">aide</a></li>
+        <li class="page-item active"><a class="page-link border-end" href="http://localhost:3000">Inscription</a></li>
+        <li class="page-item active"><a class="page-link" href="http://localhost:3000">Se connecter</a></li>
+        
+        </li>
+        
+        
+    </ul>
+    
+    
+    
+</nav>
+</section>
+
+<nav class="navbar navbar-black bg-white shadow-sm sticky-top py-3 d-none d-lg-flex">
+ <div class="container d-flex justify-content-between align-items-center"> 
+ <!-- Logo -->
+  <a class="navbar-brand logo" href="index.html"> <img src="logop.png" alt="BrandName" width="77" height="77" class="me-1"> </a> 
+  
+  <!-- Liens visibles uniquement en desktop -->
+  
+   <div class="d-flex flex-wrap gap-3 d-none d-lg-flex"> <a href="#page1" class="navbar-brand fw mb-0 h5">T-shirt</a>
+   
+    <a href="#page1" class="navbar-brand fw mb-0 h5">Pantalon</a> <a href="#page2" class="navbar-brand fw mb-0 h5">Baskets</a>
+    
+     <a href="#page3" class="navbar-brand fw mb-0 h5">Sweat-shirt</a>
+      <div class="search-bar ms-3">
+  <div class="input-group search-compact rounded" style="width: 200px;">
+    <input type="text" class="form-control border-0 py-1" placeholder="Recherche..." aria-label="Search">
+    <button class="btn btn-dark p-1 d-flex align-items-center justify-content-center" type="button">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+</div> <!-- Bouton menu pour mobile --> 
+      
+      <button class="btn btn-outline-dark d-lg-none fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu"> Menu </button>
+      
+       <!-- Icônes Panier + Compte -->
+       
+        <ul class="navbar-nav align-items-center d-flex flex-row gap-4 mb-0"> <!-- Panier --> <li class="nav-item"> <a class="nav-link d-flex align-items-center" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="black" class="bi bi-bag" viewBox="0 0 16 16"> <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/> </svg> </a> </li> <!-- Compte --> <li class="nav-item"> <a class="nav-link d-flex align-items-center" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="black" class="bi bi-heart-fill" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/> </svg> </a> </li> </ul> </div> </nav>
+
+
+
+
+
+<nav class="navbar navbar-black bg-white shadow-sm fixed-bottom py-3 d-lg-none" style="min-height: 90px;">
+  <div class="container d-flex justify-content-between align-items-center">
+
+
+
+    <!-- Logo -->
+    <a class="navbar-brand logo" href="index.html">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="black" class="bi bi-house" viewBox="0 0 16 16">
+  <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+</svg>
+    </a>
+ <a class="navbar-brand logo" href="#">
+   <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="black" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+</svg>
+    </a>
+
+ <!-- Bouton Burger (mobile) -->
+<button class="btn d-lg-none fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu"><h style="font-size:30px;  font-family:'Arial', sans-serif; 
+
+  font-stretch: condensed;
+  text-transform: uppercase; 
+
+  ">MENU
+
+</button>
+
+<!-- Menu Offcanvas -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="mobileMenuLabel"></h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Fermer"></button>
+  </div>
+
+  <div class="offcanvas-body d-flex flex-column justify-content-between">
+    <!-- Liens principaux -->
+    <ul class="list-unstyled">
+      <li class="d-flex justify-content-between align-items-center py-2 border-bottom">
+        <a href="#Tshirt" class="text-dark text-decoration-none fw-normal">Nouveauté</a>
+        <i class="fas fa-chevron-right"></i>
+      </li>
+      <li class="d-flex justify-content-between align-items-center py-2 border-bottom">
+        <a href="#Tshirt" class="text-dark text-decoration-none fw-normal">Homme</a>
+        <i class="fas fa-chevron-right"></i>
+      </li>
+      <li class="d-flex justify-content-between align-items-center py-2 border-bottom">
+        <a href="#Tshirt" class="text-dark text-decoration-none fw-normal">Femme</a>
+        <i class="fas fa-chevron-right"></i>
+      </li>
+      <li class="d-flex justify-content-between align-items-center py-2 border-bottom">
+        <a href="#" class="text-dark text-decoration-none fw-normal">Promotion</a>
+        <i class="fas fa-chevron-right"></i>
+      </li>
+      <li class="d-flex justify-content-between align-items-center py-2 border-bottom">
+        <a href="#Tshirt" class="text-dark text-decoration-none fw-normal">Sportswear</a>
+        <i class="fas fa-chevron-right"></i>
+      </li>
+    </ul>
+
+    <!-- Marques en bas -->
+    <div class="mt-4">
+      <a href="#" class="d-flex align-items-center mb-3 text-dark text-decoration-none">
+        <img src="logop.png" alt="Jordan" width="66" height="66" class="me-2">
+        VigoBlue
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Icônes -->
+       <a class="navbar-brand logo" href="">
+<svg xmlns="http://www.w3.org/2000/svg"  width="40" height="40" fill="black" class="bi bi-bag" viewBox="0 0 16 16">
+  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+</svg>
+    </a>
+ <a class="navbar-brand logo" href="">
+ <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="black" class="bi bi-person" viewBox="0 0 16 16">
+  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+</svg>
+    </a>
+     
+
+<!-- FontAwesome & Bootstrap si pas encore inclus -->
+<!--
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+-->
+
+    </ul>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+<section id="page1">
+
+  <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+    
+    <!-- Indicateurs -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    
+    
+    <!-- Slides -->
+    <div class="carousel-inner">
+      
+      <div class="carousel-item active" style="background-image: url('ls.png');">
+        <div class="carousel-caption d-none d-md-block">
+          
+        </div>
+      </div>
+      
+      <div class="carousel-item" style="background-image: url('ze.png');">
+        <div class="carousel-caption d-none d-md-block">
+          
+        </div>
+      </div>
+      
+      <div class="carousel-item">
+  <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover">
+    <source src="Blue.mp4" type="video/mp4">
+    Ton navigateur ne supporte pas la vidéo.
+  </video>
+</div>
+
+      
+    </div>
+    
+
+    <!-- Contrôles -->
+    
+  
+  </div>
+
+</section>
+
+  <canvas id="three-canvas"></canvas>
+  <section>
+  <div class="row g-1">
+    
+    <div class="col-6 col-md-4 col-lg-2 text-center">
+  <div class="position-relative d-inline-block">
+    <img src="jst.png" class="img-fluid img-thumbnai" alt="Image 1">
+    <div class="overlay-text">VigoBlue</div>
+  </div>
+</div>
+<div class="col-6 col-md-4 col-lg-2 text-center">
+  <div class="position-relative d-inline-block">
+    <img src="pantalon.png" class="img-fluid img-thumbnai" alt="Image 1">
+    <div class="overlay-text">Pantalon</div>
+  </div>
+</div>
+<div class="col-6 col-md-4 col-lg-2 text-center">
+  <div class="position-relative d-inline-block">
+    <img src="vigo2.png" class="img-fluid img-thumbnai" alt="Image 1">
+    <div class="overlay-text">T-Shirts</div>
+  </div>
+</div>
+<div class="col-6 col-md-4 col-lg-2 text-center">
+  <div class="position-relative d-inline-block">
+    <img src="basket.png" class="img-fluid img-thumbnai" alt="Image 1">
+    <div class="overlay-text">A venir</div>
+  </div>
+</div>
+<div class="col-6 col-md-4 col-lg-2 text-center">
+  <div class="position-relative d-inline-block">
+    <img src="promo2.png" class="img-fluid img-thumbnai" alt="Image 1">
+    <div class="overlay-text">Promotion</div>
+  </div>
+</div><div class="col-6 col-md-4 col-lg-2 text-center">
+  <div class="position-relative d-inline-block">
+    <img src="vigo1.png" class="img-fluid img-thumbnai" alt="Image 1">
+    <div class="overlay-text">Style</div>
+  </div>
+</div>
+        </div>
+      </section>
+     
+  <div class="marquee-container overflow-hidden bg-light shadow-sm">
+  <div class="marquee-content d-flex align-items-center">
+        <p class="card-text">VigoBlue propose des produits au design unique, alliant style et responsabilité. Chaque création est pensée dans le respect des normes écologiques, pour une mode moderne, durable et engagée..</p>
+    
+  </div>
+</div>
+        <section>
+          <div class="rose">
+  <div class="row g-1">
+    
+<div class="col-6 col-md-6 col-lg-3 text-center">
+  <div class="position-relative d-inline-block">
+    <img src="basket1.png" class="img-fluid img-thumbnai" alt="Image 1">
+    <div class="overlay-text"></div>
+  </div>
+</div>
+<div class="col-6 col-md-6 col-lg-3 text-center">
+  <div class="position-relative d-inline-block">
+    <img src="veste1.png" class="img-fluid img-thumbnai" alt="Image 1">
+    <div class="overlay-text"></div>
+  </div>
+</div><div class="col-6 col-md-6 col-lg-3 text-center">
+  <div class="position-relative d-inline-block">
+    <img src="eco.png" class="img-fluid img-thumbnai" alt="Image 1">
+    <div class="overlay-text"> <a href="#aide" class="btn btn-success cta-btn">Préserver l'environnement</a></div>
+  </div>
+</div><div class="col-6 col-md-6 col-lg-3 text-center">
+  <div class="position-relative d-inline-block">
+    <img src="panier.png" class="img-fluid img-thumbnai" alt="Image 1">
+    <div class="overlay-text"><a href="#Tshirt" class="btn btn-dark cta-btn">Style Sportswear</a></div>
+  </div>
+  
+</div>
+
+        </div>
+        </div>
+      </section>
+      
+      
+<section id="Tshirt">
+<div class="container-fluid mt-5 position-relative product-slider">
+
+  <h2 class="mb-4">T-Shirts classiques</h2>
+
+  <!-- Bouton gauche -->
+  <button class="btn position-absolute top-50 start-0 translate-middle-y shadow scrollLeft">
+    &#10094;
+  </button>
+
+  <!-- Conteneur des cartes (scroll horizontal) -->
+<div class="d-flex overflow-auto gap-3 pb-3 productContainer" style="scroll-behavior: smooth;">
+
+    <!-- Produit 1 -->
+    <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
+      <div class="position-relative d-inline-block">
+        <img src="vigo1.png" class="img-fluid img-thumbnai" alt="Produit 1">
+        <h5>T-shirt blanc Oversize</h5>
+        <div class="d-flex justify-content-between align-items-center">
+      <span class="text-muted text-decoration-hrough">22.99€</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produit 2 -->
+    <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
+      <div class="position-relative d-inline-block">
+        <img src="vigo2.png" class="img-fluid img-thumbnai" alt="Produit 2">
+        <h5>T-shirt noir</h5>
+        <p></p>
+        <div class="d-flex justify-content-between align-items-center">
+      <span class="text-muted text-decoration-hrough">22.99€</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produit 3 -->
+    <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
+      <div class="position-relative d-inline-block">
+        <img src="vigo3.png" class="img-fluid img-thumbnai" alt="Produit 3">
+        <h5>Tee shirt bleu</h5>
+        <div class="d-flex justify-content-between align-items-center">
+      <span class="text-muted text-decoration-hrough">22.99€</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produit 4 -->
+    <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
+      <div class="position-relative d-inline-block">
+        <img src="vigo4.png" class="img-fluid img-thumbnai" alt="Produit 4">
+        <h5>T-shirt vert</h5>
+        <div class="d-flex justify-content-between align-items-center">
+      <span class="text-muted text-decoration-hrough">22.99€</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produit 5 -->
+    <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
+      <div class="position-relative d-inline-block">
+        <img src="Family.png" class="img-fluid img-thumbnai" alt="Produit 5">
+        <h5>Tee shirt classique noir</h5>
+        <p>Tee shirt blanc.</p>
+        <div class="d-flex justify-content-between align-items-center">
+      <span class="text-muted text-decoration-hrough">22.99€</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produit 6 -->
+    <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
+      <div class="position-relative d-inline-block">
+        <img src="Familyy.png" class="img-fluid img-thumbnai" alt="Produit 6">
+        <h5>Tee shirt classique blanc</h5>
+        <p>Tee shirt jaune.</p>
+        <div class="d-flex justify-content-between align-items-center">
+      <span class="text-muted text-decoration-hrough">22.99€</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton droit -->
+  <button class="btn position-absolute top-50 end-0 translate-middle-y shadow scrollRight">
+    &#10095;
+  </button>
+</div>
+
+<div class="container-fluid mt-5 position-relative product-slider">
+
+  <h2 class="mb-4">Nos design !</h2>
+  <!-- Bouton gauche -->
+  <button class="btn position-absolute top-50 start-0 translate-middle-y shadow scrollLeft">
+    &#10094;
+  </button>
+
+  <!-- Conteneur des cartes (scroll horizontal) -->
+<div class="d-flex overflow-auto gap-3 pb-3 productContainer" style="scroll-behavior: smooth;">
+
+    <!-- Produit 1 -->
+    <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
+      <div class="position-relative d-inline-block">
+        <img src="jeu1.png" class="img-fluid img-thumbnai" alt="Produit 1">
+        <h5>T-shirt carried</h5>
+
+        <div class="d-flex justify-content-between align-items-center">
+      <span class="text-muted text-decoration-hrough">22.99€</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produit 2 -->
+    <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
+      <div class="position-relative d-inline-block">
+        <img src="jeu.png" class="img-fluid img-thumbnai" alt="Produit 2">
+        <h5>T-shirt geek</h5>
+
+        <div class="d-flex justify-content-between align-items-center">
+      <span class="text-muted text-decoration-hrough">22.99€</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produit 3 -->
+    <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
+      <div class="position-relative d-inline-block">
+        <img src="fennec.png" class="img-fluid img-thumbnai" alt="Produit 3">
+        <h5>T-shirt fennec</h5>
+
+        <div class="d-flex justify-content-between align-items-center">
+      <span class="text-muted text-decoration-hrough">22.99€</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Produit 4 -->
+    <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
+      <div class="position-relative d-inline-block">
+        <img src="main.png" class="img-fluid img-thumbnai" alt="Produit 4">
+        <h5>T-shirt muerta</h5>
+
+        <div class="d-flex justify-content-between align-items-center">
+      <span class="text-muted text-decoration-hrough">22.99€</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton droit -->
+  <button class="btn position-absolute top-50 end-0 translate-middle-y shadow scrollRight">
+    &#10095;
+  </button>
+</div>
+
+
+  <div class="container py-5">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna vel auctor luctus, leo nunc tincidunt
+      risus, id bibendum magna magna quis velit.</p>
+  </div>
+
+  <div class="parallax parallax-2">
+    <div class="parallax-caption">
+      <h3></h3>
+      <p></p>
+    </div>
+  </div>
+</section>
+  
+
+ 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<section id="page5">
+      
+     <!-- About Section -->
+<section id="about" class="py-5 ">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-lg-6">
+                <h2 class="fw-bolder mb-4">Bienvenue sur VigoBlue</h2>
+                <p class="lead mb-4">+20 Nouveauté de tee shirt designer, une boutique qui a pour objectif de vous rendre styler .</p>
+                <a class="btn btn-outline-Link btn-lg px-4 me-sm-3" href="#aide">Service</a>
+                <a class="btn btn-outline-link btn-lg px-4" href="#aide">En savoir plus ..</a>
+            </div>
+              <div class="col-8 col-md-7 col-lg-6 text-center">
+                <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover">
+    <source src="Blue2.mp4" type="video/mp4">
+    Ton navigateur ne supporte pas la vidéo.
+  </video>
+            </div>
+            <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover">
+    <source src="Blue1.mp4" type="video/mp4">
+    Ton navigateur ne supporte pas la vidéo.
+  </video>
+            </div>
+
+</section> 
+
+   <section class="cta-section">
+  <div class="container">
+    <h2 class="cta-heading">N'oublier pas votre style!</h2>
+    <p>S'inscrire a newsletter pour recevoir les actualités de Vigoblue.</p>
+    <a href="#" class="btn btn-primary cta-btn">S'inscrire</a>
+  </div>
+</section>
+
+   <div class="footer-bottom">
+    <div class="container">
+    </div>
+  </div>
+<section id="aide">
+<footer class="footer-style">
+  <div class="container">
+
+    <!-- Bloc Besoin d'aide -->
+    <div class="footer-section">
+      <h3 class="footer-title">Besoin d'aide ?</h3>
+      <ul class="footer-links">
+        <li><strong>Commencer chat</strong><br><span class="footer-off">Hors service</span><br>De lundi à vendredi de 10:00 à 16:00.</li>
+        <li><strong>Appeler 0144323334</strong><br><span class="footer-off">Hors service</span><br>De lundi à vendredi de 09:00 à 18:00.<br><small>Appel non surtaxé, hors coût éventuel selon votre opérateur.</small></li>
+      </ul
+      >
+    </div>
+
+    <!-- Bloc Aide -->
+    <div class="footer-section">
+      <h3 class="footer-title">Aide</h3>
+      <ul class="footer-links">
+        <li><a href="#">Acheter en ligne</a></li>
+        <li><a href="#">Paiements</a></li>
+        <li><a href="#">Livraisons & suivi</a></li>
+        <li><a href="#">Retours</a></li>
+        <li><a href="#">Retour invité</a></li>
+        <li><a href="#">Carte cadeau</a></li>
+        <li><a href="#">Ticket cadeau</a></li>
+        <li><a href="#">Rechercher un ticket</a></li>
+        <li><a href="#">Achat invité</a></li>
+        <li><a href="#">Ticket électronique</a></li>
+      </ul>
+    </div>
+
+    <!-- Bloc BERSHKA MMBRS -->
+    <div class="footer-section">
+      <h3 class="footer-title">VigoBlue MMBRS</h3>
+      <ul class="footer-links">
+        <li><a href="#">Me désabonner</a></li>
+        <li><a href="#">Nous sommes VigoBlue</a></li>
+        <li><a href="#">Durabilité</a></li>
+        <li><a href="#">Travaille avec nous</a></li>
+        <li><a href="#">Nos magasins</a></li>
+        <li><a href="#">Infos légales</a></li>
+      </ul>
+    </div>
+
+    <!-- Bloc Cela peut t'intéresser -->
+    <div class="footer-section">
+      <h3 class="footer-title">Cela peut t’intéresser</h3>
+      <ul class="footer-links">
+        <li><a href="#">Vestes </a></li>
+        <li><a href="#">T-shirts </a></li>
+        <li><a href="#">Pantalons </a></li>
+        <li><a href="#">T-shirts </a></li>
+        <li><a href="#">Sweats </a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bas du footer -->
+  <div class="footer-bottom">
+    <div class="container">
+    <div class="social-links">
+                    <a href="#" class="social-icon bg-info"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon bg-danger"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon bg-primary"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+    </div>
+  </div>
+   <div class="footer-bottom">
+    <div class="container">
+      <p>&copy; 2025 VigoBlue. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+</section>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="login.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<script>
+  document.querySelectorAll(".product-slider").forEach(slider => {
+    const container = slider.querySelector(".productContainer");
+    const leftBtn = slider.querySelector(".scrollLeft");
+    const rightBtn = slider.querySelector(".scrollRight");
+    const scrollAmount = 220;
+
+    leftBtn.addEventListener("click", () => {
+      container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+    rightBtn.addEventListener("click", () => {
+      container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+  });
+</script>
+</body>
+</html>
