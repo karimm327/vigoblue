@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="index.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Oswald&display=swap" rel="stylesheet">
-  <meta name="theme-color" content="#000000">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -15,7 +14,6 @@
 <body>
 <section id="page9">
 
-     <!-- Liens visibles uniquement en desktop -->
 <nav aria-label="Page navigation">
 
 
@@ -27,7 +25,7 @@
              
         <li class="page-item active"><a class="page-link border-end" href="#aide">Trouver un magasin</a></li>
         <li class="page-item active"><a class="page-link border-end" href="#aide">aide</a></li>
-        <li class="page-item active"><a class="page-link border-end" href="http://localhost:3000">Inscription</a></li>
+        <li class="page-item active"><a class="page-link border-end" href="http://localhost:3000/signup.html">Inscription</a></li>
         <li class="page-item active"><a class="page-link" href="http://localhost:3000/login.html">Se connecter</a></li>
         
         </li>
@@ -40,32 +38,54 @@
 </nav>
 </section>
 
-<nav class="navbar navbar-black bg-white shadow-sm sticky-top py-3 d-none d-lg-flex">
+
+<nav class="navbar navbar-black bg-white shadow-sm sticky-top py-0 d-none d-lg-flex">
  <div class="container d-flex justify-content-between align-items-center"> 
- <!-- Logo -->
-  <a class="navbar-brand logo" href="index.html"> <img src="logop.png" alt="BrandName" width="77" height="77" class="me-1"> </a> 
+ <!-- Logo VigoBlue -->
+  <a class="navbar-brand logo" href="index.html"> <img src="logop.png" alt="BrandName" width="150" height="150" class="me-1"> </a> 
   
-  <!-- Liens visibles uniquement en desktop -->
   
-   <div class="d-flex flex-wrap gap-3 d-none d-lg-flex"> <a href="#page1" class="navbar-brand fw mb-0 h5">T-shirt</a>
+   <div class="d-flex flex-wrap gap-3 d-none d-lg-flex"> <a href="#Tshirt" class="navbar-brand fw mb-0 h5">T-shirt</a>
    
-    <a href="#page1" class="navbar-brand fw mb-0 h5">Pantalon</a> <a href="#page2" class="navbar-brand fw mb-0 h5">Baskets</a>
+    <a href="#Tshirt" class="navbar-brand fw mb-0 h5">Pantalon</a> <a href="#page2" class="navbar-brand fw mb-0 h5">Baskets</a>
     
-     <a href="#page3" class="navbar-brand fw mb-0 h5">Sweat-shirt</a>
-      <div class="search-bar ms-3">
-  <div class="input-group search-compact rounded" style="width: 200px;">
-    <input type="text" class="form-control border-0 py-1" placeholder="Recherche..." aria-label="Search">
-    <button class="btn btn-dark p-1 d-flex align-items-center justify-content-center" type="button">
-      <i class="fas fa-search"></i>
-    </button>
-  </div>
-</div> <!-- Bouton menu pour mobile --> 
+     <a href="#page3" class="navbar-brand fw mb-0 h5">Sweats à capuche </a>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+
+<div class="bg-light">
+    <div class="container py-5">
+        <div class="search-wrapper">
+            <div class="search-box">
+                <input type="text" class="search-input form-control" placeholder="Recherche">
+                <i class="fas fa-search search-icon"></i>
+
+                <div class="suggestions">
+                    <div class="recent-searches">Les tendances !</div>
+                    <div class="suggestion-item">
+                        <i class="fas fa-history"></i>
+                        Tshirt design
+                    </div>
+                    <div class="suggestion-item">
+                        <i class="fas fa-search"></i>
+                        Sweats à Capuche
+                    </div>
+                    <div class="suggestion-item">
+                        <i class="fas fa-fire"></i>
+                        Tshirt classiques
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
       
       <button class="btn btn-outline-dark d-lg-none fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu"> Menu </button>
       
-       <!-- Icônes Panier + Compte -->
+
        
-        <ul class="navbar-nav align-items-center d-flex flex-row gap-4 mb-0"> <!-- Panier --> <li class="nav-item"> <a class="nav-link d-flex align-items-center" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="black" class="bi bi-bag" viewBox="0 0 16 16"> <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/> </svg> </a> </li> <!-- Compte --> <li class="nav-item"> <a class="nav-link d-flex align-items-center" href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="black" class="bi bi-heart-fill" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/> </svg> </a> </li> </ul> </div> </nav>
+        <ul class="navbar-nav align-items-center d-flex flex-row gap-4 mb-0"> <li class="nav-item"> <a class="nav-link d-flex align-items-center" href="http://localhost:3000/login.html"> <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="black" class="bi bi-bag" viewBox="0 0 16 16"> <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/> </svg> </a> </li> <li class="nav-item"> <a class="nav-link d-flex align-items-center" href="http://localhost:3000/panier.html"> <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="black" class="bi bi-emoji-heart-eyes" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/> </svg> </a> </li> </ul> </div> </nav>
 
 
 
@@ -76,7 +96,7 @@
 
 
 
-    <!-- Logo -->
+
     <a class="navbar-brand logo" href="index.html">
     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="black" class="bi bi-house" viewBox="0 0 16 16">
   <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
@@ -88,7 +108,7 @@
 </svg>
     </a>
 
- <!-- Bouton Burger (mobile) -->
+
 <button class="btn d-lg-none fw-bold" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" aria-controls="mobileMenu"><h style="font-size:30px;  font-family:'Arial', sans-serif; 
 
   font-stretch: condensed;
@@ -98,7 +118,7 @@
 
 </button>
 
-<!-- Menu Offcanvas -->
+
 <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="mobileMenuLabel"></h5>
@@ -106,7 +126,6 @@
   </div>
 
   <div class="offcanvas-body d-flex flex-column justify-content-between">
-    <!-- Liens principaux -->
     <ul class="list-unstyled">
       <li class="d-flex justify-content-between align-items-center py-2 border-bottom">
         <a href="#Tshirt" class="text-dark text-decoration-none fw-normal">Nouveauté</a>
@@ -130,7 +149,6 @@
       </li>
     </ul>
 
-    <!-- Marques en bas -->
     <div class="mt-4">
       <a href="#" class="d-flex align-items-center mb-3 text-dark text-decoration-none">
         <img src="logop.png" alt="Jordan" width="66" height="66" class="me-2">
@@ -142,13 +160,12 @@
 
 
 
-    <!-- Icônes -->
-       <a class="navbar-brand logo" href="">
+       <a class="navbar-brand logo" href="http://localhost:3000/login.html">
 <svg xmlns="http://www.w3.org/2000/svg"  width="40" height="40" fill="black" class="bi bi-bag" viewBox="0 0 16 16">
   <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
 </svg>
     </a>
- <a class="navbar-brand logo" href="">
+ <a class="navbar-brand logo" href="http://localhost:3000/login.html">
  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="black" class="bi bi-person" viewBox="0 0 16 16">
   <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
 </svg>
@@ -177,7 +194,7 @@
 
   <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
     
-    <!-- Indicateurs -->
+
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -185,7 +202,6 @@
     </div>
     
     
-    <!-- Slides -->
     <div class="carousel-inner">
       
       <div class="carousel-item active" style="background-image: url('ls.png');">
@@ -209,9 +225,6 @@
 
       
     </div>
-    
-
-    <!-- Contrôles -->
     
   
   </div>
@@ -284,12 +297,12 @@
 </div><div class="col-6 col-md-6 col-lg-3 text-center">
   <div class="position-relative d-inline-block">
     <img src="eco.png" class="img-fluid img-thumbnai" alt="Image 1">
-    <div class="overlay-text"> <a href="#aide" class="btn btn-success cta-btn">Préserver l'environnement</a></div>
+    <div class="overlay-text"> <a href="#aide" class="btn btn cta-btn">Préserver l'environnement</a></div>
   </div>
 </div><div class="col-6 col-md-6 col-lg-3 text-center">
   <div class="position-relative d-inline-block">
     <img src="panier.png" class="img-fluid img-thumbnai" alt="Image 1">
-    <div class="overlay-text"><a href="#Tshirt" class="btn btn-dark cta-btn">Style Sportswear</a></div>
+    <div class="overlay-text"><a href="#Tshirt" class="btn btn cta-btn">Style Sportswear</a></div>
   </div>
   
 </div>
@@ -304,15 +317,12 @@
 
   <h2 class="mb-4">T-Shirts classiques</h2>
 
-  <!-- Bouton gauche -->
   <button class="btn position-absolute top-50 start-0 translate-middle-y shadow scrollLeft">
     &#10094;
   </button>
 
-  <!-- Conteneur des cartes (scroll horizontal) -->
 <div class="d-flex overflow-auto gap-3 pb-3 productContainer" style="scroll-behavior: smooth;">
 
-    <!-- Produit 1 -->
     <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
       <div class="position-relative d-inline-block">
         <img src="vigo1.png" class="img-fluid img-thumbnai" alt="Produit 1">
@@ -323,7 +333,6 @@
       </div>
     </div>
 
-    <!-- Produit 2 -->
     <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
       <div class="position-relative d-inline-block">
         <img src="vigo2.png" class="img-fluid img-thumbnai" alt="Produit 2">
@@ -335,7 +344,6 @@
       </div>
     </div>
 
-    <!-- Produit 3 -->
     <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
       <div class="position-relative d-inline-block">
         <img src="vigo3.png" class="img-fluid img-thumbnai" alt="Produit 3">
@@ -346,7 +354,6 @@
       </div>
     </div>
 
-    <!-- Produit 4 -->
     <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
       <div class="position-relative d-inline-block">
         <img src="vigo4.png" class="img-fluid img-thumbnai" alt="Produit 4">
@@ -357,7 +364,6 @@
       </div>
     </div>
 
-    <!-- Produit 5 -->
     <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
       <div class="position-relative d-inline-block">
         <img src="Family.png" class="img-fluid img-thumbnai" alt="Produit 5">
@@ -369,7 +375,6 @@
       </div>
     </div>
 
-    <!-- Produit 6 -->
     <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
       <div class="position-relative d-inline-block">
         <img src="Familyy.png" class="img-fluid img-thumbnai" alt="Produit 6">
@@ -382,7 +387,6 @@
     </div>
   </div>
 
-  <!-- Bouton droit -->
   <button class="btn position-absolute top-50 end-0 translate-middle-y shadow scrollRight">
     &#10095;
   </button>
@@ -391,15 +395,14 @@
 <div class="container-fluid mt-5 position-relative product-slider">
 
   <h2 class="mb-4">Nos design !</h2>
-  <!-- Bouton gauche -->
   <button class="btn position-absolute top-50 start-0 translate-middle-y shadow scrollLeft">
     &#10094;
   </button>
 
-  <!-- Conteneur des cartes (scroll horizontal) -->
+
 <div class="d-flex overflow-auto gap-3 pb-3 productContainer" style="scroll-behavior: smooth;">
 
-    <!-- Produit 1 -->
+
     <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
       <div class="position-relative d-inline-block">
         <img src="jeu1.png" class="img-fluid img-thumbnai" alt="Produit 1">
@@ -411,7 +414,6 @@
       </div>
     </div>
 
-    <!-- Produit 2 -->
     <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
       <div class="position-relative d-inline-block">
         <img src="jeu.png" class="img-fluid img-thumbnai" alt="Produit 2">
@@ -423,7 +425,7 @@
       </div>
     </div>
 
-    <!-- Produit 3 -->
+
     <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
       <div class="position-relative d-inline-block">
         <img src="fennec.png" class="img-fluid img-thumbnai" alt="Produit 3">
@@ -435,7 +437,6 @@
       </div>
     </div>
 
-    <!-- Produit 4 -->
     <div class="col-8 col-md-6 col-lg-3 text-center" style="flex: 0 0 auto;">
       <div class="position-relative d-inline-block">
         <img src="main.png" class="img-fluid img-thumbnai" alt="Produit 4">
@@ -448,7 +449,7 @@
     </div>
   </div>
 
-  <!-- Bouton droit -->
+
   <button class="btn position-absolute top-50 end-0 translate-middle-y shadow scrollRight">
     &#10095;
   </button>
@@ -473,7 +474,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <section id="page5">
       
-     <!-- About Section -->
+
 <section id="about" class="py-5 ">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
@@ -513,7 +514,7 @@
 <footer class="footer-style">
   <div class="container">
 
-    <!-- Bloc Besoin d'aide -->
+
     <div class="footer-section">
       <h3 class="footer-title">Besoin d'aide ?</h3>
       <ul class="footer-links">
@@ -523,7 +524,7 @@
       >
     </div>
 
-    <!-- Bloc Aide -->
+
     <div class="footer-section">
       <h3 class="footer-title">Aide</h3>
       <ul class="footer-links">
@@ -540,7 +541,7 @@
       </ul>
     </div>
 
-    <!-- Bloc BERSHKA MMBRS -->
+
     <div class="footer-section">
       <h3 class="footer-title">VigoBlue MMBRS</h3>
       <ul class="footer-links">
@@ -553,7 +554,7 @@
       </ul>
     </div>
 
-    <!-- Bloc Cela peut t'intéresser -->
+
     <div class="footer-section">
       <h3 class="footer-title">Cela peut t’intéresser</h3>
       <ul class="footer-links">
@@ -566,7 +567,7 @@
     </div>
   </div>
 
-  <!-- Bas du footer -->
+
   <div class="footer-bottom">
     <div class="container">
     <div class="social-links">
@@ -585,8 +586,118 @@
 </footer>
 </section>
 
+<!-- Alerte cookies -->
+<div id="cookie-banner" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(1px);
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+">
+
+    <div style="
+        background: whitesmoke;
+        color: black;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 650px;
+        width: 90%;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.25);
+    ">
+        <p style="max-width:800px;text-align:left;margin-bottom:10px; color: black; font-size:13px;">
+            En cliquant sur "Accepter tous les cookies", vous acceptez que des cookies soient stockés sur votre appareil afin d'améliorer la navigation sur le site, d'analyser son utilisation et de contribuer à nos efforts de marketing. Les préférences peuvent être ajustées à tout moment dans les paramètres des cookies. Consultez notre 
+            <a href="">Politique d'utilisation des cookies</a>
+        </p>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+            <button id="reject-all" style="font-size:13px;padding:10px 20px;background:whitesmoke;color:black;border:1px solid black;border-radius:4px;cursor:pointer;">
+                Rejeter tous les cookies
+            </button>
+
+            <button id="accept-all" style="font-size:13px;color:white;padding:10px 20px;background:#43D5B0;border-radius:2px;border:none;cursor:pointer;">
+                Accepter tous les cookies
+            </button>
+
+            <button id="customize" style="font-size:13px;padding:10px 20px;background:#2E2E2E;color:white;border:none;border-radius:2px;cursor:pointer;">
+                Paramètres des cookies
+            </button>
+        </div>
+
+        <div id="custom-options" style="display:none;margin-top:10px;text-align:left;">
+            <label><input type="checkbox" id="functional-cookies" checked disabled> Cookies nécessaires (toujours actifs)</label><br>
+            <label><input type="checkbox" id="analytics-cookies"> Cookies analytiques</label><br>
+            <label><input type="checkbox" id="marketing-cookies"> Cookies marketing / recommandations</label><br>
+
+            <button id="save-preferences" style="margin-top:10px;padding:8px 15px;background:#008CBA;color:white;border:none;border-radius:5px;cursor:pointer;">
+                Enregistrer
+            </button>
+        </div>
+    </div>
+
+</div>
 
 
+
+<script>
+const banner = document.getElementById('cookie-banner');
+const customizeBtn = document.getElementById('customize');
+const customOptions = document.getElementById('custom-options');
+const savePreferences = document.getElementById('save-preferences');
+
+
+// Afficher / cacher les options personnalisées
+customizeBtn.addEventListener('click', () => {
+    console.log('Utilisateur a cliqué sur "Paramètres des cookies"');
+    customOptions.style.display = customOptions.style.display === 'none' ? 'block' : 'none';
+});
+
+// Accepter tous les cookies
+document.getElementById('accept-all').addEventListener('click', () => {
+    console.log('Utilisateur a cliqué sur "Accepter tous les cookies"');
+    localStorage.setItem('cookies', JSON.stringify({
+        necessary: true,
+        analytics: true,
+        marketing: true
+    }));
+    banner.style.display = 'none';
+});
+
+// Refuser tous les cookies sauf nécessaires
+document.getElementById('reject-all').addEventListener('click', () => {
+    console.log('Utilisateur a cliqué sur "Rejeter tous les cookies"');
+    localStorage.setItem('cookies', JSON.stringify({
+        necessary: true,
+        analytics: false,
+        marketing: false
+    }));
+    banner.style.display = 'none';
+});
+
+// Sauvegarder les préférences personnalisées
+savePreferences.addEventListener('click', () => {
+    console.log('Utilisateur a cliqué sur "Enregistrer les préférences"');
+    const preferences = {
+        necessary: true,
+        analytics: document.getElementById('analytics-cookies').checked,
+        marketing: document.getElementById('marketing-cookies').checked
+    };
+    localStorage.setItem('cookies', JSON.stringify(preferences));
+    banner.style.display = 'none';
+});
+
+// Afficher le bandeau UNIQUEMENT si l'utilisateur n'a JAMAIS choisi
+window.addEventListener('load', () => {
+    if(!localStorage.getItem('cookies')){
+        banner.style.display = 'flex';
+    }
+});
+</script>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
