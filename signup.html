@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="signup.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscription - VigoBlue</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mt-5 p-4 shadow-sm">
+        <a class="navbar-brand logo" href="index.html"> <img src="logop.png" alt="BrandName" width="150" height="150" class="me-1"> </a> 
+        <h3 class="text-center mb-4">Faisons de toi un membre Vigoblue.</h3>
+        <form id="registerForm">
+
+          <div class="mb-3">
+            <label for="registerEmail" class="form-label"></label>
+            <input type="email" id="registerEmail" class="form-control" placeholder="Email*" required>
+          </div>
+          
+          <div class="mb-3">
+            <label for="nom" class="form-label"></label>
+            <input type="text" id="nom" class="form-control" placeholder="Nom*" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="prenom" class="form-label"></label>
+            <input type="text" id="prenom" class="form-control" placeholder="Prénom*" required>
+          </div>
+
+       
+
+<div class="mb-3 d-flex gap-2">
+  <input type="number" id="jour" class="form-control" placeholder="Jour*" min="1" max="31" required>
+  <input type="number" id="mois" class="form-control" placeholder="Mois*" min="1" max="12" required>
+  <input type="number" id="annee" class="form-control" placeholder="Année*" min="1900" max="2025" required>
+</div>
+
+          <div class="mb-3">
+            <label for="verificationCode" class="form-label">Code de vérification</label>
+            <input type="text" id="verificationCode" class="form-control" placeholder="Code*" required>
+          </div>
+          <div class="mb-3">
+            <button type="button" class="btn btn-dark" id="sendCodeBtn">Envoyer le code </button>
+          </div>
+
+          <div class="mb-3 position-relative">
+            <label for="registerPassword" class="form-label">Créer un mot de passe</label>
+            <input type="password" id="registerPassword" class="form-control" required>
+            <i id="togglePassword" class="bi bi-eye-fill toggle-eye"></i>
+            <ul class="password-rules mt-2" style="padding-left:0;">
+              <li id="ruleLength" style="color:red;">• Minimum 8 caractères</li>
+              <li id="ruleUpper" style="color:red;">• Au moins 1 majuscule</li>
+              <li id="ruleDigits" style="color:red;">• Au moins 3 chiffres</li>
+              <li id="ruleSymbol" style="color:red;">• Au moins 1 symbole (!@#$%^&*.)</li>
+            </ul>
+          </div>
+
+
+          <div class="d-grid mb-3">
+            <button type="submit" class="btn btn-dark">S'inscrire</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const sendCodeBtn = document.getElementById("sendCodeBtn");
+const registerForm = document.getElementById("registerForm");
+const passwordInput = document.getElementById("registerPassword");
+const togglePassword = document.getElementById("togglePassword");
+const ruleLength = document.getElementById("ruleLength");
+const ruleUpper = document.getElementById("ruleUpper");
+const ruleDigits = document.getElementById("ruleDigits");
+const ruleSymbol = document.getElementById("ruleSymbol");
+
+
+togglePassword.addEventListener("click", () => {
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    togglePassword.classList.replace("bi-eye-fill","bi-eye-slash-fill");
+  } else {
+    passwordInput.type = "password";
+    togglePassword.classList.replace("bi-eye-slash-fill","bi-eye-fill");
+  }
+});
+
+passwordInput.addEventListener("input", () => {
+  const val = passwordInput.value;
+  ruleLength.style.color = val.length >= 8 ? "green" : "red";
+  ruleUpper.style.color = /[A-Z]/.test(val) ? "green" : "red";
+  ruleDigits.style.color = (val.match(/\d/g) || []).length >= 3 ? "green" : "red";
+  ruleSymbol.style.color = /[!@#$%^&*\.]/.test(val) ? "green" : "red";
+});
+
+// envoi du code de vérification //
+const emailInput = document.getElementById("registerEmail");
+
+// mettre à jour le texte du bouton selon l'email saisie//
+emailInput.addEventListener("input", () => {
+  const email = emailInput.value.trim();
+  sendCodeBtn.textContent = email ? `Envoyer le code à ${email}` : "Envoyer le code";
+});
+
+
+// Envoi du code de vérification par mail //
+sendCodeBtn.addEventListener("click", async () => {
+  const email = emailInput.value.trim();
+  if (!email) { alert("Veuillez renseigner votre email"); return; }
+
+  // Compteur 60sc pour le prochain envoi de code //
+  sendCodeBtn.disabled = true;
+  let countdown = 60;
+  sendCodeBtn.textContent = `Veuillez patienter ${countdown}s`;
+
+  const timer = setInterval(() => {
+    countdown--;
+    sendCodeBtn.textContent = `Veuillez patienter ${countdown}s`;
+    if (countdown <= 0) {
+      clearInterval(timer);
+      sendCodeBtn.disabled = false;
+      sendCodeBtn.textContent = email ? `Envoyer le code à ${email}` : "Envoyer le code";
+    }
+  }, 1000);
+
+  try {
+    const res = await fetch("/send-verification-code", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    if (data.success) alert("Code envoyé à votre email !");
+    else alert("Erreur : " + data.message);
+  } catch (err) {
+    console.error(err);
+    alert("Erreur serveur");
+  }
+});
+
+//  Inscription  //
+registerForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  
+  
+// creation de variable
+  const email = document.getElementById("registerEmail").value.trim();
+  const password = passwordInput.value;
+  const code = document.getElementById("verificationCode").value.trim();
+  const prenom = document.getElementById("prenom").value.trim();
+  const nom = document.getElementById("nom").value.trim();
+  const jour = document.getElementById("jour").value.trim();
+  const mois = document.getElementById("mois").value.trim();
+  const annee = document.getElementById("annee").value.trim();
+
+  // Vérification mot de passe 8 lettre, 3 chiffre avec symboles
+  const validPassword = password.length >= 8 &&
+                        /[A-Z]/.test(password) &&
+                        (password.match(/\d/g) || []).length >= 3 &&
+                        /[!@#$%^&*\.]/.test(password);
+
+  if (!validPassword) { 
+    alert("Mot de passe invalide : respectez les règles affichées.");
+    return;
+  }
+
+  if (!email || !password || !code || !prenom || !nom || !jour || !mois || !annee) { 
+    alert("Tous les champs sont requis"); 
+    return; 
+  }
+
+  try {
+    const res = await fetch("/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password, code, prenom, nom, jour, mois, annee })
+    });
+    const data = await res.json();
+    alert(data.message);
+    if (data.success && data.redirect) setTimeout(() => window.location.href = data.redirect, 1000);
+  } catch (err) {
+    console.error(err);
+    alert("Erreur serveur");
+  }
+});
+</script>
+</body>
+</html>
+
