@@ -2,32 +2,29 @@ import nodemailer from "nodemailer";  // envoie de mail
 import cors from "cors";
 import express from "express"; //express+node.js pour créer le server
 import session from "express-session";
-import mysql from "mysql2";  // databases
 import path from "path";  //cheminement
 import { fileURLToPath } from "url";
 import Stripe from "stripe";  // moyen de paiement
 import bcrypt from "bcrypt";  // hachage des mdp
 import dotenv from "dotenv";
+import pkg from 'pg';
+const { Pool } = pkg;
 
-dotenv.config();
-
-const app = express();
-const port = 3000; // port sur lequel va ecouter le server
-
-// Connexion MySQL //
-const db = mysql.createConnection({
+const db = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  port: process.env.DB_PORT || 3306
+  port: process.env.DB_PORT || 5432,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
-//si le server et connecter avec la database
-db.connect(err => {
-  if (err) console.error("❌ MySQL:", err);
-  else console.log("✅ Connecté à MySQL");
-});
+db.connect()
+  .then(() => console.log("Connecté à PostgreSQL !"))
+  .catch(err => console.error("Erreur de connexion PostgreSQL :", err));
+
 
 //  Middlewares  //
 app.use(express.json());
