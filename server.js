@@ -10,6 +10,8 @@ import dotenv from "dotenv";
 import pkg from 'pg';
 const { Pool } = pkg;
 
+const app = express();
+
 const db = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
