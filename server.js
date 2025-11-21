@@ -27,8 +27,17 @@ app.use(cors({
   credentials: true
 }));
 
-// Réponse AUX préflight OPTIONS (obligatoire pour Render)
-app.options("*", cors());
+// Middleware pour préflight CORS sur toutes les routes
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Origin", "https://vigoblue.netlify.app");
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
 
 // ----------------- Connexion PostgreSQL -----------------
 const db = new Pool({
