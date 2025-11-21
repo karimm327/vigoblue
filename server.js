@@ -15,6 +15,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+const pgSession = connectPgSimple(session);
 
 // ----------------- Connexion PostgreSQL -----------------
 const db = new Pool({
