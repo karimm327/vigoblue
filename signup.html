@@ -13,10 +13,11 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card mt-5 p-4 shadow-sm">
-        <a class="navbar-brand logo" href="index.html"> <img src="logop.png" alt="BrandName" width="150" height="150" class="me-1"> </a> 
+        <a class="navbar-brand logo" href="index.html">
+          <img src="logop.png" alt="BrandName" width="150" height="150" class="me-1">
+        </a> 
         <h3 class="text-center mb-4">Faisons de toi un membre Vigoblue.</h3>
         <form id="registerForm">
-
           <div class="mb-3">
             <label for="registerEmail" class="form-label"></label>
             <input type="email" id="registerEmail" class="form-control" placeholder="Email*" required>
@@ -32,13 +33,11 @@
             <input type="text" id="prenom" class="form-control" placeholder="Prénom*" required>
           </div>
 
-       
-
-<div class="mb-3 d-flex gap-2">
-  <input type="number" id="jour" class="form-control" placeholder="Jour*" min="1" max="31" required>
-  <input type="number" id="mois" class="form-control" placeholder="Mois*" min="1" max="12" required>
-  <input type="number" id="annee" class="form-control" placeholder="Année*" min="1900" max="2025" required>
-</div>
+          <div class="mb-3 d-flex gap-2">
+            <input type="number" id="jour" class="form-control" placeholder="Jour*" min="1" max="31" required>
+            <input type="number" id="mois" class="form-control" placeholder="Mois*" min="1" max="12" required>
+            <input type="number" id="annee" class="form-control" placeholder="Année*" min="1900" max="2025" required>
+          </div>
 
           <div class="mb-3">
             <label for="verificationCode" class="form-label">Code de vérification</label>
@@ -60,11 +59,9 @@
             </ul>
           </div>
 
-
           <div class="d-grid mb-3">
             <button type="submit" class="btn btn-dark">S'inscrire</button>
           </div>
-
         </form>
       </div>
     </div>
@@ -72,6 +69,12 @@
 </div>
 
 <script>
+/* -------------------- CONFIGURATION -------------------- */
+const API_URL = window.location.hostname === "localhost" 
+                ? "http://localhost:3000" 
+                : "https://ton-backend.onrender.com"; // <--- remplace par ton URL Render
+
+/* -------------------- ELEMENTS -------------------- */
 const sendCodeBtn = document.getElementById("sendCodeBtn");
 const registerForm = document.getElementById("registerForm");
 const passwordInput = document.getElementById("registerPassword");
@@ -80,8 +83,9 @@ const ruleLength = document.getElementById("ruleLength");
 const ruleUpper = document.getElementById("ruleUpper");
 const ruleDigits = document.getElementById("ruleDigits");
 const ruleSymbol = document.getElementById("ruleSymbol");
+const emailInput = document.getElementById("registerEmail");
 
-
+/* -------------------- TOGGLE PASSWORD -------------------- */
 togglePassword.addEventListener("click", () => {
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
@@ -92,6 +96,7 @@ togglePassword.addEventListener("click", () => {
   }
 });
 
+/* -------------------- CHECK PASSWORD RULES -------------------- */
 passwordInput.addEventListener("input", () => {
   const val = passwordInput.value;
   ruleLength.style.color = val.length >= 8 ? "green" : "red";
@@ -100,22 +105,17 @@ passwordInput.addEventListener("input", () => {
   ruleSymbol.style.color = /[!@#$%^&*\.]/.test(val) ? "green" : "red";
 });
 
-// envoi du code de vérification //
-const emailInput = document.getElementById("registerEmail");
-
-// mettre à jour le texte du bouton selon l'email saisie//
+/* -------------------- UPDATE BUTTON TEXT -------------------- */
 emailInput.addEventListener("input", () => {
   const email = emailInput.value.trim();
   sendCodeBtn.textContent = email ? `Envoyer le code à ${email}` : "Envoyer le code";
 });
 
-
-// Envoi du code de vérification par mail //
+/* -------------------- SEND VERIFICATION CODE -------------------- */
 sendCodeBtn.addEventListener("click", async () => {
   const email = emailInput.value.trim();
   if (!email) { alert("Veuillez renseigner votre email"); return; }
 
-  // Compteur 60sc pour le prochain envoi de code //
   sendCodeBtn.disabled = true;
   let countdown = 60;
   sendCodeBtn.textContent = `Veuillez patienter ${countdown}s`;
@@ -131,7 +131,7 @@ sendCodeBtn.addEventListener("click", async () => {
   }, 1000);
 
   try {
-    const res = await fetch("/send-verification-code", {
+    const res = await fetch(`${API_URL}/send-verification-code`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email })
@@ -145,13 +145,11 @@ sendCodeBtn.addEventListener("click", async () => {
   }
 });
 
-//  Inscription  //
+/* -------------------- REGISTER -------------------- */
 registerForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  
-  
-// creation de variable
-  const email = document.getElementById("registerEmail").value.trim();
+
+  const email = emailInput.value.trim();
   const password = passwordInput.value;
   const code = document.getElementById("verificationCode").value.trim();
   const prenom = document.getElementById("prenom").value.trim();
@@ -160,7 +158,6 @@ registerForm.addEventListener("submit", async (e) => {
   const mois = document.getElementById("mois").value.trim();
   const annee = document.getElementById("annee").value.trim();
 
-  // Vérification mot de passe 8 lettre, 3 chiffre avec symboles
   const validPassword = password.length >= 8 &&
                         /[A-Z]/.test(password) &&
                         (password.match(/\d/g) || []).length >= 3 &&
@@ -177,7 +174,7 @@ registerForm.addEventListener("submit", async (e) => {
   }
 
   try {
-    const res = await fetch("/register", {
+    const res = await fetch(`${API_URL}/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password, code, prenom, nom, jour, mois, annee })
@@ -193,4 +190,3 @@ registerForm.addEventListener("submit", async (e) => {
 </script>
 </body>
 </html>
-
