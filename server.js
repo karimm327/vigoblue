@@ -92,7 +92,7 @@ function isGmail(email) {
 
 // ----------------- Routes -----------------
 // Page statiques
-app.get("/", (req, res) => res.sendFile(path.join(__dirname, "public/login.html")));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "/login.html")));
 app.get("/reset-password.html", (req, res) => res.sendFile(path.join(__dirname, "public/reset-password.html")));
 
 // Utilisateur connecté
