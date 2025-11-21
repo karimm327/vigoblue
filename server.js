@@ -11,7 +11,14 @@ import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
 import connectPgSimple from "connect-pg-simple";
 
+
+
+
+
+const app = express();
+const port = process.env.PORT || 3000;
 dotenv.config();
+
 
 
 app.use(cors({
@@ -22,10 +29,6 @@ app.use(cors({
 
 // Réponse AUX préflight OPTIONS (obligatoire pour Render)
 app.options("*", cors());
-
-
-const app = express();
-const port = process.env.PORT || 3000;
 
 // ----------------- Connexion PostgreSQL -----------------
 const db = new Pool({
