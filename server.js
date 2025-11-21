@@ -11,6 +11,8 @@ import pkg from 'pg';
 const { Pool } = pkg;
 
 const app = express();
+const port = process.env.PORT || 5432; // ← ajoute ça en haut, avant app.listen
+
 
 const db = new Pool({
   host: process.env.DB_HOST,
