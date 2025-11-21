@@ -25,7 +25,7 @@ app.use(cors({
 }));
 
 // Préflight OPTIONS
-app.options("*", cors());
+app.options("/*", cors());
 
 // ----------------- Connexion PostgreSQL -----------------
 const db = new Pool({
