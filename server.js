@@ -13,6 +13,17 @@ import connectPgSimple from "connect-pg-simple";
 
 dotenv.config();
 
+
+app.use(cors({
+  origin: ["https://vigoblue.netlify.app"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
+// Réponse AUX préflight OPTIONS (obligatoire pour Render)
+app.options("*", cors());
+
+
 const app = express();
 const port = process.env.PORT || 3000;
 
