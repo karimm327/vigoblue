@@ -8,8 +8,8 @@ import dotenv from "dotenv";
 import { Pool } from "pg";
 import Stripe from "stripe";
 import bcrypt from "bcrypt";
-import nodemailer from "nodemailer";
 import connectPgSimple from "connect-pg-simple";
+import sgMail from "@sendgrid/mail"; // <-- import SendGrid
 
 // ⚡ Charger les variables d'environnement en premier
 dotenv.config();
@@ -17,7 +17,6 @@ console.log("DB_HOST:", process.env.DB_HOST);
 console.log("DB_USER:", process.env.DB_USER);
 console.log("DB_NAME:", process.env.DB_NAME);
 console.log("DB_PORT:", process.env.DB_PORT);
-
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -37,16 +36,15 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", "true");
 
   if (req.method === "OPTIONS") {
-    return res.sendStatus(204); // Juste répondre 204, pas besoin de '*' dans la route
+    return res.sendStatus(204);
   }
 
   next();
 });
 
-
 // ----------------- Connexion PostgreSQL -----------------
 const db = new Pool({
-  host: process.env.DB_HOST,       // render postgres host
+  host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
@@ -77,7 +75,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use(express.static(path.join(__dirname))); // <-- dossier racine de ton site
+app.use(express.static(path.join(__dirname)));
 
 // ----------------- Stripe -----------------
 const stripe = new Stripe(process.env.STRIPE_SECRET);
@@ -91,23 +89,25 @@ function isGmail(email) {
   return /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
 }
 
+// ----------------- SendGrid -----------------
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 // ----------------- Routes statiques -----------------
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "vigoblue/login.html")));
 app.get("/signup.html", (req, res) => res.sendFile(path.join(__dirname, "vigoblue/signup.html")));
 app.get("/reset-password.html", (req, res) => res.sendFile(path.join(__dirname, "vigoblue/reset-password.html")));
 
 // ----------------- Routes API -----------------
-// Exemple route /send-verification-code
 app.post("/send-verification-code", async (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ success: false, message: "Email requis" });
   if (!isGmail(email)) return res.status(400).json({ success: false, message: "Seuls les emails Gmail sont autorisés !" });
 
   try {
-    const code = Math.floor(100000 + Math.random()*900000);
+    const code = Math.floor(100000 + Math.random() * 900000);
     const expire = Date.now() + 5*60*1000;
 
-    // DB
+    // Stocker en DB
     try {
       await db.query("DELETE FROM verification_codes WHERE email = $1", [email]);
       await db.query("INSERT INTO verification_codes (email, code, expire) VALUES ($1,$2,$3)", [email, code, expire]);
@@ -116,16 +116,11 @@ app.post("/send-verification-code", async (req, res) => {
       return res.status(500).json({ success: false, message: "Erreur base de données" });
     }
 
-    // Nodemailer
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_APP_PASS } // mot de passe app
-    });
-
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+    // Envoi email via SendGrid
+    await sgMail.send({
       to: email,
-      subject: "Code de vérification",
+      from: process.env.EMAIL_FROM, // ex : no-reply@vigoblue.com
+      subject: "Code de vérification VigoBlue",
       html: `<div style="text-align:center;">
               <h2>VigoBlue</h2>
               <h3 style="background-color:black; color:white; padding:10px;">Code de vérification</h3>
@@ -136,7 +131,7 @@ app.post("/send-verification-code", async (req, res) => {
 
     res.json({ success: true, message: "Code envoyé à votre email !" });
   } catch (err) {
-    console.error(err);
+    console.error("Erreur SendGrid :", err);
     res.status(500).json({ success: false, message: "Erreur serveur" });
   }
 });
