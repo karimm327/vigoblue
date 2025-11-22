@@ -1,4 +1,3 @@
-// server.js
 import express from "express";
 import session from "express-session";
 import cors from "cors";
@@ -8,8 +7,8 @@ import dotenv from "dotenv";
 import { Pool } from "pg";
 import Stripe from "stripe";
 import bcrypt from "bcrypt";
+import nodemailer from "nodemailer";
 import connectPgSimple from "connect-pg-simple";
-import sgMail from "@sendgrid/mail"; // <-- import SendGrid
 
 // ⚡ Charger les variables d'environnement en premier
 dotenv.config();
@@ -35,10 +34,7 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Content-Type");
   res.header("Access-Control-Allow-Credentials", "true");
 
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(204);
-  }
-
+  if (req.method === "OPTIONS") return res.sendStatus(204);
   next();
 });
 
@@ -59,10 +55,7 @@ db.connect()
 // ----------------- Sessions -----------------
 const pgSession = connectPgSimple(session);
 app.use(session({
-  store: new pgSession({
-    pool: db,
-    tableName: "user_sessions"
-  }),
+  store: new pgSession({ pool: db, tableName: "user_sessions" }),
   secret: process.env.SESSION_SECRET || "secretkey",
   resave: false,
   saveUninitialized: false,
@@ -85,12 +78,10 @@ function validatePassword(password) {
   const regex = /^(?=.*[A-Z])(?=(?:.*\d){3,})(?=.*[!@#$%^&*()_+=[\]{};':"\\|,.<>/?]).{8,}$/;
   return regex.test(password);
 }
+
 function isGmail(email) {
   return /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
 }
-
-// ----------------- SendGrid -----------------
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // ----------------- Routes statiques -----------------
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "vigoblue/login.html")));
@@ -104,10 +95,10 @@ app.post("/send-verification-code", async (req, res) => {
   if (!isGmail(email)) return res.status(400).json({ success: false, message: "Seuls les emails Gmail sont autorisés !" });
 
   try {
-    const code = Math.floor(100000 + Math.random() * 900000);
+    const code = Math.floor(100000 + Math.random()*900000);
     const expire = Date.now() + 5*60*1000;
 
-    // Stocker en DB
+    // DB
     try {
       await db.query("DELETE FROM verification_codes WHERE email = $1", [email]);
       await db.query("INSERT INTO verification_codes (email, code, expire) VALUES ($1,$2,$3)", [email, code, expire]);
@@ -116,22 +107,27 @@ app.post("/send-verification-code", async (req, res) => {
       return res.status(500).json({ success: false, message: "Erreur base de données" });
     }
 
-    // Envoi email via SendGrid
-    await sgMail.send({
+    // Nodemailer
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS } // App Password
+    });
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
       to: email,
-      from: process.env.EMAIL_FROM, // ex : no-reply@vigoblue.com
-      subject: "Code de vérification VigoBlue",
+      subject: "Code de vérification",
       html: `<div style="text-align:center;">
-              <h2>VigoBlue</h2>
-              <h3 style="background-color:black; color:white; padding:10px;">Code de vérification</h3>
-              <p>${email}, votre code : <b>${code}</b></p>
-              <p>Il expire dans 5 minutes</p>
-            </div>`
+               <h2>VigoBlue</h2>
+               <h3 style="background-color:black; color:white; padding:10px;">Code de vérification</h3>
+               <p>${email}, votre code : <b>${code}</b></p>
+               <p>Il expire dans 5 minutes</p>
+             </div>`
     });
 
     res.json({ success: true, message: "Code envoyé à votre email !" });
   } catch (err) {
-    console.error("Erreur SendGrid :", err);
+    console.error("Erreur serveur :", err);
     res.status(500).json({ success: false, message: "Erreur serveur" });
   }
 });
