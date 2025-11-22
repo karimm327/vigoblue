@@ -7,11 +7,13 @@ import dotenv from "dotenv";
 import { Pool } from "pg";
 import Stripe from "stripe";
 import bcrypt from "bcrypt";
-import nodemailer from "nodemailer";
 import connectPgSimple from "connect-pg-simple";
+import sgMail from "@sendgrid/mail";
 
-// ⚡ Charger les variables d'environnement en premier
+// ⚡ Charger les variables d'environnement
 dotenv.config();
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 console.log("DB_HOST:", process.env.DB_HOST);
 console.log("DB_USER:", process.env.DB_USER);
 console.log("DB_NAME:", process.env.DB_NAME);
@@ -27,13 +29,11 @@ app.use(cors({
   credentials: true
 }));
 
-// Préflight OPTIONS
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "https://vigoblue.netlify.app");
   res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   res.header("Access-Control-Allow-Credentials", "true");
-
   if (req.method === "OPTIONS") return res.sendStatus(204);
   next();
 });
@@ -78,7 +78,6 @@ function validatePassword(password) {
   const regex = /^(?=.*[A-Z])(?=(?:.*\d){3,})(?=.*[!@#$%^&*()_+=[\]{};':"\\|,.<>/?]).{8,}$/;
   return regex.test(password);
 }
-
 function isGmail(email) {
   return /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
 }
@@ -95,8 +94,8 @@ app.post("/send-verification-code", async (req, res) => {
   if (!isGmail(email)) return res.status(400).json({ success: false, message: "Seuls les emails Gmail sont autorisés !" });
 
   try {
-    const code = Math.floor(100000 + Math.random()*900000);
-    const expire = Date.now() + 5*60*1000;
+    const code = Math.floor(100000 + Math.random() * 900000);
+    const expire = Date.now() + 5 * 60 * 1000;
 
     // DB
     try {
@@ -107,32 +106,19 @@ app.post("/send-verification-code", async (req, res) => {
       return res.status(500).json({ success: false, message: "Erreur base de données" });
     }
 
-    // Nodemailer
-    const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,       // port SSL
-    secure: true,    // SSL obligatoire pour 465
-    auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-    },
-    tls: {
-      rejectUnauthorized: false
-    }
-  });
-
-
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+    // SendGrid
+    const msg = {
       to: email,
+      from: process.env.EMAIL_USER, // doit être un sender vérifié SendGrid
       subject: "Code de vérification",
       html: `<div style="text-align:center;">
                <h2>VigoBlue</h2>
                <h3 style="background-color:black; color:white; padding:10px;">Code de vérification</h3>
                <p>${email}, votre code : <b>${code}</b></p>
                <p>Il expire dans 5 minutes</p>
-             </div>`
-    });
+             </div>`,
+    };
+    await sgMail.send(msg);
 
     res.json({ success: true, message: "Code envoyé à votre email !" });
   } catch (err) {
