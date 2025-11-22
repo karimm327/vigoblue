@@ -77,7 +77,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use(express.static(path.join(__dirname, "vigoblue"))); // <-- dossier racine de ton site
+app.use(express.static(path.join(__dirname))); // <-- dossier racine de ton site
 
 // ----------------- Stripe -----------------
 const stripe = new Stripe(process.env.STRIPE_SECRET);
