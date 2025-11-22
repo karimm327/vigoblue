@@ -107,25 +107,31 @@ app.post("/send-verification-code", async (req, res) => {
     }
 
     // SendGrid
-    const msg = {
-      to: email,
-      from: process.env.EMAIL_USER, // doit être un sender vérifié SendGrid
-      subject: "Code de vérification",
-      html: `<div style="text-align:center;">
-               <h2>VigoBlue</h2>
-               <h3 style="background-color:black; color:white; padding:10px;">Code de vérification</h3>
-               <p>${email}, votre code : <b>${code}</b></p>
-               <p>Il expire dans 5 minutes</p>
-             </div>`,
-    };
-    await sgMail.send(msg);
+  try {
+  const msg = {
+    to: email,
+    from: process.env.EMAIL_USER, // doit être un sender vérifié SendGrid
+    subject: "Code de vérification",
+    html: `<div style="text-align:center;">
+             <h2>VigoBlue</h2>
+             <h3 style="background-color:black; color:white; padding:10px;">Code de vérification</h3>
+             <p>${email}, votre code : <b>${code}</b></p>
+             <p>Il expire dans 5 minutes</p>
+           </div>`,
+  };
 
-    res.json({ success: true, message: "Code envoyé à votre email !" });
-  } catch (err) {
+  await sgMail.send(msg);
+  res.json({ success: true, message: "Code envoyé à votre email !" });
+
+} catch (err) {
+  if (err.response && err.response.body) {
+    console.error("Erreur SendGrid :", err.response.body);
+  } else {
     console.error("Erreur serveur :", err);
-    res.status(500).json({ success: false, message: "Erreur serveur" });
   }
-});
+  res.status(500).json({ success: false, message: "Erreur serveur SendGrid" });
+}
+
 
 // ----------------- Lancer serveur -----------------
 app.listen(port, () => console.log(`🚀 Serveur lancé sur le port ${port}`));
