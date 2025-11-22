@@ -109,9 +109,18 @@ app.post("/send-verification-code", async (req, res) => {
 
     // Nodemailer
     const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS } // App Password
-    });
+    host: "smtp.gmail.com",
+    port: 465,       // port SSL
+    secure: true,    // SSL obligatoire pour 465
+    auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
