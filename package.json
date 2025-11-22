@@ -18,6 +18,5 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "connect-pg-simple": "^8.0.0",
-    "@sendgrid/mail": "^8.1.6"
   }
 }
